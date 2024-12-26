@@ -134,7 +134,7 @@
 		$tanggal = date('Y-m-d');
 
 		$koneksi->query("INSERT INTO tb_pembayaran (id_pembelian, nama, bank, jumlah, tanggal, bukti)
-						 VALUES ('$id_pembayaran', '$nama', '$bank', '$jumlah', '$tanggal', '$namafoto')");
+						VALUES ('$id_pembayaran', '$nama', '$bank', '$jumlah', '$tanggal', '$namafoto')");
 
 		$koneksi->query("UPDATE tb_pembelian SET status='Menunggu Konfirmasi' WHERE id_pembelian='$id_pembayaran'");
 
