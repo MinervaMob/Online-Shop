@@ -39,8 +39,8 @@
 
   <!-- KONTEN -->
 
-  <div class="container">
-          <table class="table">
+  <div class="container h-100 py-5">
+          <table class="table mt-5 pt-5">
           
           <thead class="thead-light">
             <tr>
@@ -86,7 +86,7 @@
 
  
 
-
+    <?php include 'footer.php'; ?>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

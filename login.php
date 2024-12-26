@@ -1,6 +1,10 @@
-<?php  
+<?php
   session_start();
   $koneksi = new mysqli("localhost", "root", "","db_toko");
+  if ($koneksi->connect_error) {
+    die("Koneksi database gagal: " . $koneksi->connect_error);
+}
+
 
   // if (!isset($_SESSION["keranjang"])) {
   //   echo "<script>alert('Pilih Produk Dulu Baru Login');</script>";
@@ -33,10 +37,8 @@
 
   <br>
  
-<!-- KONTEN -->
-
-
-  <section class="container-fluid">
+<!-- KONTEN LOGIN -->
+  <section class="container mt-5 pt-5">
 
       <section class="row justify-content-center">
 

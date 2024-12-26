@@ -34,6 +34,8 @@
 <!-- KONTEN -->
 <form method="POST" onsubmit="return validateInput()">
 	<div class="content">
+		<div class="container mt-5 pt-5">
+			<div class="row">
 		<div class="container shadow rounded p-3 d-flex justify-content-center align-items-center w-100">
 			<div class="row w-100 d-flex justify-content-center align-items-center w-100">
 				
