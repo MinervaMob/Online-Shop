@@ -67,7 +67,7 @@ $koneksi = new mysqli("localhost", "root", "","db_toko");
 <!-- JavaScript -->
 <script>
 function redirectToWhatsApp(idPembelian, tanggal, totalHarga) {
-    const whatsAppLink = `https://api.whatsapp.com/send?phone=6282279076077&text=Halo%20SIXTEE%20OLSHOP,%20saya%20ingin%20melakukan%20pembayaran%20dengan%20detail:%0A-%20ID%20Pembelian:%20${idPembelian}%0A-%20Tanggal:%20${tanggal}%0A-%20Total:%20Rp.${totalHarga}%0A%0ATerima%20kasih.`;
+    const whatsAppLink = `https://api.whatsapp.com/send?phone=6283170799236&text=Halo%20FASHION%20OSHOP,%20saya%20ingin%20melakukan%20pembayaran%20dengan%20detail:%0A-%20ID%20Pembelian:%20${idPembelian}%0A-%20Tanggal:%20${tanggal}%0A-%20Total:%20Rp.${totalHarga}%0A%0ATerima%20kasih.`;
 
     // Kirim permintaan ke server untuk update status
     fetch(`update_status.php?id=${idPembelian}`, { method: 'GET' })
