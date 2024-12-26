@@ -11,7 +11,6 @@
 					<th>Nama Pelanggan</th>
 					<th>E-Mail</th>
 					<th>Telepon</th>
-					<th>Aksi</th>
 				</tr>
 			</thead>
 
@@ -25,18 +24,6 @@
 					<td><?php echo $pecah['nama_pelanggan']; ?></td>
 					<td><?php echo $pecah['email']; ?></td>
 					<td><?php echo $pecah['telepon']; ?></td>
-					<td>
-						 <div class="table-data-feature">
-                                <a class="item" data-toggle="tooltip" data-placement="top" title="Edit" href="#">
-                                     <i class="zmdi zmdi-edit"></i> 
-                                 </a>
-                                 <span><span><span></span></span></span>
-                                 <a class="item" data-toggle="tooltip" data-placement="top" title="Delete" href="#">
-                                <i class="zmdi zmdi-delete"></i>
-                                </a>                          
-                         </div>
-
-					</td>
 				</tr>
 			<?php $no++; ?>
 			<?php } ?>
