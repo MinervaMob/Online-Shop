@@ -1,0 +1,202 @@
+@import url('https://fonts.googleapis.com/css2?family=Parkinsans:wght@300..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nova+Mono&family=Parkinsans:wght@300..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Titillium+Web:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nova+Mono&family=Parkinsans:wght@300..800&display=swap');
+
+  
+/* navbar */
+  /* Navbar Customization */
+  .navbar {
+    font-family: 'Montserrat', sans-serif;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding-top: 1rem;
+    padding-bottom: 1rem; 
+    min-height: 80px; 
+  }
+
+  .navbar-collapse {
+    display: flex;
+    justify-content: center; /* Mengatur semua item di tengah */
+    gap: 20px; /* Memberikan jarak antar elemen */
+  }
+
+  .navbar-nav {
+    flex-direction: row; /* Menjadikan item horizontal */
+    align-items: center;
+  }
+
+  .navbar-nav .nav-link {
+    padding: 0.5rem 1rem;
+    text-align: center;
+    transition: color 0.3s ease-in-out;
+  }
+
+  .navbar-nav .nav-link:hover {
+    color: #ffc107; /* Warna hover */
+  }
+
+
+
+  
+  .navbar-brand {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #f8f9fa !important;
+  }
+  
+  .nav-link {
+    font-size: 1rem;
+    font-weight: 500;
+    transition: color 0.2s ease-in-out;
+  }
+  
+  .nav-link:hover {
+    color: #ffc107 !important; /* Warna kuning saat hover */
+  }
+  
+  .navbar-toggler {
+    border: none;
+  }
+  
+  .navbar-toggler:focus {
+    box-shadow: none;
+  }
+  
+  /* Search Bar Customization */
+  .search-bar{
+    margin-left: auto;
+  }
+  .search-bar input{
+    font-family: 'Parkinsans', sans-serif;
+    font-weight: 300;
+    background: transparent;
+    flex: 1;
+    border: 0;
+    outline: none;
+    padding: 14px 10px;
+    font-size: 14px;
+    color: #FFF9BF;
+  }
+  ::placeholder{
+    padding-left: 10px;
+    color: #FFF9BF;
+    opacity: 0.7;
+  }
+  .search-bar button .tbl-search{
+    width: 15px;
+  }
+  .search-bar button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 0;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    background: rgba(75, 162, 255, 0);
+    cursor: pointer;
+  }
+  
+
+/* Responsive Adjustments */
+@media (max-width: 991px) {
+  .navbar-brand {
+      font-size: 1.2rem;
+  }
+
+  form.search-bar {
+      margin-top: 10px;
+  }
+}
+
+
+  /* menu produk */
+  .banner-produk{
+    height: 50vh;
+    width: 100%;
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('../image/baju1.jpg');
+    background-size: cover;
+  }
+  
+  .text-produk{
+    font-family: 'Parkinsans', sans-serif;
+    font-size: 40px;
+    color: var(--warna5);
+    align-items: center ;
+  }
+  
+  .search-bar{
+    width: 50%;
+    min-width: 50px;
+    display: flex;
+    align-items: center;
+    border-radius: 8px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+  }
+  .search-bar input{
+    font-family: 'Parkinsans', sans-serif;
+    font-weight: 300;
+    background: transparent;
+    flex: 1;
+    border: 0;
+    outline: none;
+    padding: 14px 10px;
+    font-size: 14px;
+    color: #FFF9BF;
+  }
+  ::placeholder{
+    padding-left: 10px;
+    color: #FFF9BF;
+    opacity: 0.7;
+  }
+  .search-bar button .tbl-search{
+    width: 15px;
+  }
+  .search-bar button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 0;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    background: rgba(75, 162, 255, 0);
+    cursor: pointer;
+  }
+
+  /* icon  */
+
+  .custom-icon{
+    margin-right: 1rem;
+  }
+  
+
+  .custom-icon-cart {
+    font-size: 1rem; /* Atur ukuran ikon */
+    color: #fff; /* Atur warna ikon */
+    transition: transform 0.2s ease-in-out; /* Efek hover */
+}
+
+  .custom-icon-cart:hover {
+    transform: scale(1.2); /* Ikon membesar saat dihover */
+}
+
+  .custom-icon-info {
+    font-size: 1rem; /* Atur ukuran ikon */
+    color: #fff; /* Atur warna ikon */
+
+    transition: transform 0.2s ease-in-out; /* Efek hover */
+}
+
+  .custom-icon-info:hover {
+    transform: scale(1.2); /* Ikon membesar saat dihover */
+}
+
+/* Menambahkan jarak antar ikon */
+  .d-flex.gap-3 {
+  gap: 1rem; /* Atur jarak antar tombol, sesuaikan dengan kebutuhan */
+}
+
+
+  
