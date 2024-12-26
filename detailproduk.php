@@ -33,7 +33,7 @@
 <!-- KONTEN -->
 <form method="POST" onsubmit="return validateInput()">
 	<div class="content">
-		<div class="container">
+		<div class="container mt-5 pt-5">
 			<div class="row">
 				
 				<div class="col-md-4">
