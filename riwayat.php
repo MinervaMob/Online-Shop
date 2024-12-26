@@ -21,47 +21,53 @@ $koneksi = new mysqli("localhost", "root", "","db_toko");
 <?php include 'navbar.php'; ?>
 <br>
 <!-- KONTEN -->
-<div class="container">
-    <h4>Riwayat Belanja</h4>
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>No</th>
-                <th>Tanggal</th>
-                <th>Total Belanja</th>
-                <th>Status</th>
-                <th>Aksi</th>
-            </tr>
-        </thead>
-        <?php 
-        $no = 1;
-        $id_pelanggan = $_SESSION['pelanggan']['id_pelanggan']; 
-        $ambil = $koneksi->query("SELECT * FROM tb_pembelian WHERE id_pelanggan='$id_pelanggan'");
-        while ($pecah = $ambil->fetch_assoc()) {
-            $formattedDate = date('d-m-Y', strtotime($pecah['tanggal_pembelian']));
-            $formattedPrice = number_format($pecah['total_pembelian'], 0, ',', '.');
-        ?>
-        <tbody>
-            <tr>
-                <td><?php echo $no; ?></td>
-                <td><?php echo $formattedDate; ?></td>
-                <td><?php echo "Rp. " . $formattedPrice; ?></td>
-                <td><?php echo $pecah['status']; ?></td>
-                <td style="text-align: center">
-                    <a href="nota.php?id=<?= $pecah['id_pembelian']; ?>" class="btn btn-primary">DETAIL</a>
-                    <?php if ($pecah['status'] == 'Menunggu Konfirmasi' || $pecah['status'] == 'Pending') : ?>
-                    <a href="javascript:void(0);" 
-                        onclick="redirectToWhatsApp(
-                            <?= $pecah['id_pembelian']; ?>, 
-                            '<?= urlencode($formattedDate); ?>', 
-                            '<?= $formattedPrice; ?>')" 
-                        class="btn btn-success">BAYAR</a>
-                    <?php endif; ?>
-                </td>
-            </tr>
-        </tbody>
-        <?php $no++; } ?>
-    </table>
+<div class="container mt-5 pt-5 h-100">
+
+	<h4>Riwayat Belanja</h4>
+
+	<table class="table table-bordered">
+	  
+	  <thead>
+	    <tr>
+	      <th scope="col">No</th>
+	      <th scope="col">Tanggal</th>
+	      <th scope="col">Total Belanja</th>
+	      <th scope="col">Status</th>
+	      <th scope="col">Aksi</th>
+	    </tr>
+	  </thead>
+
+	  <?php 
+	  	$no = 1;
+		$id_pelanggan = $_SESSION['pelanggan']['id_pelanggan']; 
+		$ambil = $koneksi->query("SELECT * FROM tb_pembelian WHERE id_pelanggan='$id_pelanggan'");
+		while ($pecah = $ambil->fetch_assoc()) {
+	  ?>
+
+	  <tbody>
+	  	<tr>
+	  		<td><?php echo $no; ?></td>
+	  		<td><?php echo $pecah['tanggal_pembelian']; ?></td>
+	  		<td><?php echo "Rp." .number_format($pecah['total_pembelian']); ?></td>
+	  		<td><?php echo $pecah['status'] ?></td>
+	  		<td style="text-align: center">
+          <?php if ($pecah['status'] == 'Sedang di Kirim' || $pecah['status'] == 'Produk di Terima') :?>
+              <a href="nota.php?id=<?= $pecah['id_pembelian']; ?>" class="btn btn-primary btn-block">DETAIL</a>
+          <?php endif; ?>
+
+          <?php if ($pecah['status'] == 'Menunggu Konfirmasi' || $pecah['status'] == 'Pending' ) :?>
+                <a href="nota.php?id=<?= $pecah['id_pembelian']; ?>" class="btn btn-primary">DETAIL</a>
+          <a href="pembayaran.php?id=<?= $pecah['id_pembelian']; ?>" class="btn btn-success">BAYAR</a>
+          <?php endif; ?>
+
+	  		
+	  		</td>
+	  	</tr>
+	  </tbody>
+	  <?php $no++; ?>
+	  <?php } ?>
+
+	</table>
 </div>
 
 <!-- JavaScript -->
@@ -80,5 +86,6 @@ function redirectToWhatsApp(idPembelian, tanggal, totalHarga) {
 }
 </script>
 
+		<?php include 'footer.php'; ?>
 </body>
 </html>

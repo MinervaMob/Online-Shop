@@ -47,7 +47,7 @@
 
 <!-- KONTEN -->
 
-	<div class="container">
+	<div class="container mt-5 pt-5">
 		<h3>Konfirmasi Pembayaran</h3>
 
 		<br>
