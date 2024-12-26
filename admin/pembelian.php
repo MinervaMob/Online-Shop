@@ -3,8 +3,6 @@
         <div class="section__content section__content--p30">
           <div class="container-fluid">
             <h5 class="heading-title">Halaman Pembelian</h5>
-           
-
 
   <div class="row">
       <div class="col col-lg-12">
@@ -47,10 +45,7 @@
                                		  &nbsp;
 
                                		<a class="btn btn-outline-success" href="index.php?halaman=pembayaran&id=<?php echo $pecah['id_pembelian'] ?>">Bayar</a>     
-                               <?php endif; ?>
-                               		
-                               
-                                     
+                               <?php endif; ?>                                   
                          </div>
 
 					</td>
