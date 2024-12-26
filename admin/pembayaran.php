@@ -1,136 +1,77 @@
+<h1 style="text-align: center;">Halaman Detail Pembayaran</h1>
 
-<!DOCTYPE html>
-<html>
-<head>
-		  <!-- Required meta tags-->
-		  <meta charset="UTF-8">
-		  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		  <meta name="description" content="au theme template">
-		  <meta name="author" content="Hau Nguyen">
-		  <meta name="keywords" content="au theme template">
+	<br>
+	
+	 <div class="col-md-6 col-md-6">
+           <a class="au-btn au-btn-icon au-btn--green au-btn--small" href="tambahpembayaran.php?halaman=tambahpembayaran">
+            	<i class="zmdi zmdi-plus"></i>Tambah Transaksi
+            </a>                                 
+     </div>
+    
 
-		  <!-- Title Page-->
-		  <title>Grid System</title>
+  <div class="row m-t-30">
+      <div class="col-md-12">
+		<div class="table-responsive m-b-40">
+		<table class="table table-borderless table-data3">
+			<thead>
+				<tr>
+					<th>ID Pembayaran</th>
+					<th>ID Pembelian</th>
+					<th>Nama</th>
+					<th>Bank</th>
+					<th>Jumlah</th>
+					<th>Tanggal</th>
+					<th>Bukti</th>
+					<th>Aksi</th>
+				</tr>
+			</thead>
 
-		  <!-- Fontfaces CSS-->
-		  <link href="css/font-face.css" rel="stylesheet" media="all">
-		  <link href="vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
-		  <link href="vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">
-		  <link href="vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+			<tbody>
+			<?php
+// Query untuk mengambil data dari tabel tb_pembayaran
+$ambil = $koneksi->query("SELECT * FROM tb_pembayaran");
 
-		  <!-- Bootstrap CSS-->
-		  <link href="vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all">
-
-		  <!-- Vendor CSS-->
-		  <link href="vendor/animsition/animsition.min.css" rel="stylesheet" media="all">
-		  <link href="vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet" media="all">
-		  <link href="vendor/wow/animate.css" rel="stylesheet" media="all">
-		  <link href="vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" media="all">
-		  <link href="vendor/slick/slick.css" rel="stylesheet" media="all">
-		  <link href="vendor/select2/select2.min.css" rel="stylesheet" media="all">
-		  <link href="vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all">
-
-		  <!-- Main CSS-->
-		  <link href="css/theme.css" rel="stylesheet" media="all">
-</head>
-
-<body class="animsition">
- <div class="page-wrapper">
-
-	<div class="main-content">
-        <div class="section__content section__content--p30">
-          <div class="container-fluid">
-
-          	<?php 
-
-          		$id_pembelian = $_GET['id'];
-          		$ambil = $koneksi->query("SELECT * FROM tb_pembayaran WHERE id_pembelian='$id_pembelian'");
-          		$pecah = $ambil->fetch_assoc();
-
-          		//echo "<pre>".print_r($pecah)."<pre>";
-
-          	?>
-
-
-          	 <div class="row">
-              
-              <div class="col-lg-8">
-                <section class="card">
-                  <div class="card-body text-secondary">
-                  	<table class="table table-top-campaign">
-                  	 <h3 class="title-3 m-b-30">Info Pembayaran</h3>
-                  		<tbody>
-
-                  			<tr>
-                  				<td>Nama</td>
-                  				<td><?= $pecah['nama']; ?></td>
-                  			</tr>
-
-                  			<tr>
-                  				<td>Bank Pengiriman</td>
-                  				<td><?= $pecah['bank']; ?></td>
-                  			</tr>	
-                  			
-                  			<tr>
-                  				<td>Jumlah Pembayaran</td>
-                  				<td><?php echo "Rp." .number_format($pecah['jumlah']); ?></td>
-                  			</tr>
-
-                  			<tr>
-                  				<td>Tanggal Pembayaran</td>
-                  				<td><?= $pecah['tanggal']; ?></td>
-                  			</tr>
-                  		</tbody>
-                  	</table>
-                  </div>
-                </section>
-              </div>
-              <div class="col">
-                <section class="card">
-                  <div class="card-body text-secondary">
-                  	<img width="250px" height="180px" align="left" src="../foto_bukti/<?= $pecah['bukti']; ?>">
-                  </div>
-                </section>
-              </div>
-              
+// Loop untuk menampilkan data dalam bentuk tabel
+while ($pecah = $ambil->fetch_assoc()) {
+?>
+    <tr>
+        <td><?php echo $pecah['id_pembayaran']; ?></td>
+        <td><?php echo $pecah['id_pembelian']; ?></td>
+        <td><?php echo $pecah['nama']; ?></td>
+        <td><?php echo $pecah['bank']; ?></td>
+        <td><?php echo $pecah['jumlah']; ?></td>
+        <td><?php echo $pecah['tanggal']; ?></td>
+        <td>
+            <?php 
+            // Cek apakah file gambar ada
+            if (!empty($pecah['bukti']) && file_exists($pecah['bukti'])) { ?>
+                <img src="<?php echo $pecah['bukti']; ?>" width="100">
+            <?php } else { ?>
+                <p>Gambar tidak ditemukan.</p>
+            <?php } ?>
+        </td>
+        <td>
+            <div class="table-data-feature">
+                <!-- Tombol Edit -->
+                <a class="item" data-toggle="tooltip" data-placement="top" title="Edit" 
+                   href="ubahpembayaran.php?id=<?php echo $pecah['id_pembayaran']; ?>">
+                    <i class="zmdi zmdi-edit"></i>
+                </a>
+                <!-- Tombol Hapus -->
+                <a class="item" data-toggle="tooltip" data-placement="top" title="Delete" 
+                   href="hapuspembayaran.php?id=<?php echo $pecah['id_pembayaran']; ?>" 
+                   onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
+                    <i class="zmdi zmdi-delete"></i>
+                </a>
             </div>
+        </td>
+    </tr>
+<?php 
+} // Akhir loop while
+?>
 
-            <form method="POST">
-            <div class="row">
-            	<div class="col-lg-12">
-            		<section class="card">
-            			<div class="card-body text-secondary">
-            				<label>Ubah Status</label>
-            				<select class="form-control" name="status">
-            					<option value="Sedang di Kirim">Sedang di Kirim</option>
-            					<option value="Produk di Terima">Produk di Terima</option>
-            				</select>
-            				<br>
-            				<button class="btn btn-success" name="konfirmasi">Konfirmasi</button>
-            			</div>
-            		</section>
-            	</div>
-            </div>
-            </form>
-          </div>
-        </div>
-    </div>
+			</tbody>
+		</table>
+		</div>
+	</div>
 </div>
-
-
-	<?php 
-		if (isset($_POST['konfirmasi'])) {
-			$status = $_POST['status'];
-
-			$koneksi->query("UPDATE tb_pembelian SET status = '$status' WHERE id_pembelian='$id_pembelian'");
-			echo "<script>alert('Data Pembelian Berhasil di Update');</script>";
-			echo "<script>location = 'index.php?halaman=pembayaran';</script>";
-		}
-		
-
-	?>
-
-
-</body>
-
-</html>

@@ -1,5 +1,4 @@
 <?php 
-
     // KONEKSI KE DATABASE
     session_start();
     $koneksi = new mysqli("localhost", "root", "","db_toko");
@@ -10,13 +9,6 @@
     }
 
  ?>
-
-
-
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -29,7 +21,7 @@
     <meta name="keywords" content="au theme template">
 
     <!-- Title Page-->
-    <title>Inbox</title>
+    <title>Halaman Admin</title>
 
     <!-- Fontfaces CSS-->
     <link href="css/font-face.css" rel="stylesheet" media="all">
@@ -115,10 +107,6 @@
                         <li>
                             <a href="index.php?halaman=produk">
                                 <i class="fas fa-archive"></i>Produk</a>
-                        </li>
-                        <li>
-                            <a href="index.php?halaman=pembelian">
-                                <i class="fas fa-shopping-cart"></i>Pembelian</a>
                         </li>
                         <li>
                             <a href="index.php?halaman=pelanggan">
@@ -266,7 +254,7 @@
                                 <div class="account-wrap">
                                     <div class="account-item clearfix js-item-menu">
                                         <div class="image">
-                                            <img src="images/icon/avatar-06.jpg" alt="John Doe" />
+                                            <img src="images/icon/avatar-02.jpg" alt="John Doe" />
                                         </div>
                                         <div class="content">
                                             <a class="js-acc-btn" href="#"><?php echo $_SESSION['admin']['nama'] ?></a>
