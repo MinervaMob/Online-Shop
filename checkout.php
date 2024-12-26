@@ -182,44 +182,57 @@
   </div> 
 
 
-    <?php 
+  <?php 
+if (isset($_POST["checkout"])) {
+    if (!isset($_SESSION["pelanggan"]["id_pelanggan"]) || empty($_POST["id_ongkir"]) || empty($_POST["alamat"]) || empty($_SESSION['keranjang'])) {
+        die("Error: Data checkout tidak lengkap.");
+    }
 
-       if (isset($_POST["checkout"])) {
-        $id_pelanggan = $_SESSION["pelanggan"]["id_pelanggan"];
-        $id_ongkir = $_POST["id_ongkir"];
-        $tanggal_pembelian = date("Y-m-d");
+    $id_pelanggan = $_SESSION["pelanggan"]["id_pelanggan"];
+    $id_ongkir = intval($_POST["id_ongkir"]);
+    $tanggal_pembelian = date("Y-m-d");
+    $alamat = $koneksi->real_escape_string($_POST["alamat"]);
 
-        $ambil  = $koneksi->query("SELECT * FROM provinsi WHERE id_prov = '$id_ongkir'");
-        $arrayongkir = $ambil->fetch_assoc();
-        $tarif = $arrayongkir["ongkir"];
-        $alamat = $_POST["alamat"];
+    // Validasi data ongkir
+    $ambil = $koneksi->prepare("SELECT * FROM provinsi WHERE id_prov = ?");
+    $ambil->bind_param("i", $id_ongkir);
+    $ambil->execute();
+    $result = $ambil->get_result();
+    $arrayongkir = $result->fetch_assoc();
 
-        $total_pembelian = $totalbelanja + $tarif;
+    if (!$arrayongkir) {
+        die("Error: Data provinsi tidak ditemukan.");
+    }
 
-        //MENYIMPAN KETABEL PEMBELIAN
-        $sql = $koneksi->query("INSERT INTO tb_pembelian (id_pelanggan, id_prov, tanggal_pembelian, total_pembelian, tarif, alamat,status)  VALUES ('$id_pelanggan', '$id_ongkir', '$tanggal_pembelian', '$total_pembelian', '$tarif', '$alamat','Pending')" );
+    $tarif = $arrayongkir["ongkir"];
+    $total_pembelian = $totalbelanja + $tarif;
 
-        //MENDAPATKAN ID_PEMBELIAN YANG BARUSAN TERJADI
-        $id_pembelian_barusan = $koneksi->insert_id;
+    // Simpan ke tabel pembelian
+    $stmt = $koneksi->prepare("INSERT INTO tb_pembelian 
+        (id_pelanggan, id_prov, tanggal_pembelian, total_pembelian, tarif, alamat, status) 
+        VALUES (?, ?, ?, ?, ?, ?, ?)");
+    $status = "Pending";
+    $stmt->bind_param("iisdsis", $id_pelanggan, $id_ongkir, $tanggal_pembelian, $total_pembelian, $tarif, $alamat, $status);
+    $stmt->execute();
+    $id_pembelian_barusan = $stmt->insert_id;
 
-        foreach ($_SESSION['keranjang'] as $id_produk => $jumlah) {
-          $sql2 = $koneksi->query("INSERT INTO tb_pembelian_produk (id_pembelian, id_produk, jumlah) 
-                           VALUES ('$id_pembelian_barusan', '$id_produk', '$jumlah')");
-        }
+    // Simpan detail produk
+    $stmt2 = $koneksi->prepare("INSERT INTO tb_pembelian_produk (id_pembelian, id_produk, jumlah) VALUES (?, ?, ?)");
+    $stmt2->bind_param("iii", $id_pembelian_barusan, $id_produk, $jumlah);
 
-        //MENGOSONGKAN KERANJANG
-        unset($_SESSION['keranjang']);
+    foreach ($_SESSION['keranjang'] as $id_produk => $jumlah) {
+        $stmt2->execute();
+    }
 
-        if($sql2 === true){
-          echo "<script>alert('PEMBELIAN SUKSES');</script> ";
-          echo "<script>location='nota.php?id=$id_pembelian_barusan';</script> " ;
-        } else {
-          echo "Gagal: ". $koneksi->error;
-        }
-          
-        }
+    // Kosongkan keranjang
+    unset($_SESSION['keranjang']);
 
-    ?>
+    // Redirect ke halaman nota
+    echo "<script>alert('PEMBELIAN SUKSES');</script>";
+    echo "<script>location='nota.php?id=$id_pembelian_barusan';</script>";
+}
+?>
+
 
   
 <!-- KONTEN -->

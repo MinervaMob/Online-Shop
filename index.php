@@ -16,14 +16,14 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 
-    <title>SIX-TEE OLSHOP</title>
+    <title>FASHION SHOP</title>
   </head>
 
   <body>
   <?php include 'navbar.php'; ?>
 
   <br>
- 
+
 <!-- BANNER -->
 <div class="jumbotron text-center banner-produk">
   <h1 class="display-4 text-produk">Selamat Datang di FASHION SHOP</h1>
